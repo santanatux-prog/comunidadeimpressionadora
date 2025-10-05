@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container">
+
+        <form method="POST" action="" class="border p-5 m-5">
+            {{ form.csrf_token }}
+            <legend>Criar Post</legend>
+            <fieldset>
+                <div class="form-group">
+                    {{ form.titulo.label(class="form-control-label") }}
+                    {% if form.titulo.errors %}
+                        {{ form.titulo(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form.titulo.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form.titulo(class="form-control") }}
+                    {% endif %}
+                </div><br>
+                <div class="form-group">
+                    {{ form.corpo.label(class="form-control-label") }}
+                    {% if form.corpo.errors %}
+                        {{ form.corpo(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form.corpo.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form.corpo(class="form-control") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            {{ form.botao_submit(class="btn-primary mt-4") }}
+        </form>
+    </div>
+{% endblock %}

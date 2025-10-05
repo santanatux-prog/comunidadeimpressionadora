@@ -1,0 +1,74 @@
+{% extends 'perfil.html' %}
+
+{% block form_editar_perfil %}
+
+    <div class="container">
+
+        <hr>
+        <form method="POST" action="" class="border p-5 m-5" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <legend>Editar Perfil</legend>
+            <fieldset>
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form.username.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form.username(class="form-control") }}
+                    {% endif %}
+                </div><br>
+
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form.email.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form.email(class="form-control") }}
+                    {% endif %}
+                </div><br>
+
+                <div class="form-group">
+                    {{ form.foto_perfil.label }}
+                    {{ form.foto_perfil(class="form-control-file mt-3") }}
+                    {% if form.foto_perfil.erros %}
+                        {% for erro in form.foto_perfil.erros %}
+                            <span class="text-danger">{{ erro }}</span><br>
+                        {% endfor %}
+                    {% endif %}
+                </div><br>
+
+                <p>Tamanho recomendado 200x200px</p>
+                <hr>
+
+                <p>Cursos</p>
+                {% for campo in form %}
+                    {% if 'curso_' in campo.name %}
+                        <div class="form-group">
+                            {{ campo(class="form-check-input mt-3") }}
+                            {{ campo.label(class="form-check-label mt-3") }}
+
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+
+
+
+
+
+            </fieldset>
+            {{ form.botao_submit(class="btn-primary mt-4") }}
+        </form>
+    </div>
+
+{% endblock %}
